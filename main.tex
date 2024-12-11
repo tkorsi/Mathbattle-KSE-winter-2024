@@ -1,7 +1,7 @@
 \documentclass{article}
 \usepackage[utf8]{inputenc}
 \usepackage[ukrainian]{babel}
-\usepackage{amsmath}
+\usepackage{amsfonts,amsmath}
 
 \begin{document}
 
@@ -474,7 +474,7 @@ P(x) = 1 + x + x^2 + \cdots + x^{2024}.
 
 \noindent\textbf{Задача 10.} (9) Нехай випадкові величини \(X_1, X_2, \dots\) незалежні та мають показниковий розподіл з параметром \(\lambda\). Нехай \(S_0 = 0, S_n = X_1 + \cdots + X_n\), \(n \geq 1\), а \(N = \max\{n : S_n < 1\}\). Знайдіть розподіл величини \(S_N\).
 
-\textbf{Розв’язок.}  
+\textbf{Розв’язок 1(Шапанов).}  
 
 \textbf{Інтуїція:} Випадкові величини \(X_1, X_2, \dots\) представляють часи між подіями в процесі Пуассона з параметром \(\lambda\). Сума \(S_n = X_1 + \cdots + X_n\) відповідає моменту настання \(n\)-ї події.  
 
@@ -557,6 +557,29 @@ P(x) = 1 + x + x^2 + \cdots + x^{2024}.
 Іншими словами, \(S_N\) — це суміш:
 - Точки в 0 з вагою \(e^{-\lambda}\), і
 - Неперервного розподілу на \((0,1)\) з густиною \(\lambda e^{-\lambda(1-x)}\).
+
+\textbf{Розв'язок 2(Ярош).}
+Зрозуміло, що при $x\le0$ маємо $F_{S_{N}}(x)=\mathbb{P}(S_{N}<x)=0$, бо майже напвено $\forall n\in \mathbb{N}: S_{n}\ge 0$.\\
+Також зрозуміло, що при $x\ge1$ маємо $F_{S_{N}}(x)=\mathbb{P}(S_{N}<x)=1$, бо $S_{N}<1$ за визначенням.\\
+При $x\in(0,1)$ маємо
+\begin{equation*}
+	F_{S_{N}}(x)=\mathbb{P}(S_{N} < x) = \sum_{n=0}^{\infty} \mathbb{P}(S_{N}<x \text{ і } N=n)\\
+\end{equation*}
+Якщо $n=0$, то
+\begin{multline*}
+	\mathbb{P}(S_{N}<x \text{ і } N=n)=\mathbb{P}(S_{N}<x \text{ і } N=0)=\mathbb{P}(S_{0}<x \text{ і } S_{1}\ge1)=\\
+	=\mathbb{P}(0<x \text{ і } S_{1}\ge1)=\mathbb{P}(S_{1}\ge1)
+	=\mathbb{P}(X_{1}\ge1)=\int_{1}^{\infty} e^{-\lambda x} dx = e^{-\lambda}
+\end{multline*}
+Якщо $n>0$, то $S_{n}$ є сумою $n$ незалежних випадкових величин з експоненційним розподілом з параметром $\lambda$, тому $S_{n}\sim \Gamma(\lambda,n)$ 
+\begin{multline*}
+	\mathbb{P}(S_{N}<x \text{ і } N=n) = \mathbb{P}(S_{n}<x \text{ і } N=n) = \mathbb{P}(S_{n}<x \text{ і } S_{n+1}\ge 1) 
+	=\\= \mathbb{P}(S_{n}<x \text{ і } S_{n} + X_{n+1}\ge 1)
+	=\int_{0}^{x}ds\int_{1-s}^{\infty} f_{(S_{n},X_{n+1})}(s,x) dx=\\=\int_{0}^{x}ds\int_{1-s}^{\infty} f_{S_{n}}(s)f_{X_{n+1}}(x) dx = \int_{0}^{x}ds\int_{1-s}^{\infty}  \frac{\lambda^{n}}{(n-1)!}s^{n-1}e^{-\lambda s}e^{-\lambda x} dx =\\= \frac{\lambda^{n}}{(n-1)!} \int_{0}^{x}s^{n-1}e^{-\lambda s}e^{-\lambda (1-s)} ds 
+	=\frac{\lambda^{n}}{(n-1)!} \int_{0}^{x}s^{n-1}e^{-\lambda} ds = \frac{(\lambda x)^{n}}{n!}e^{-\lambda}
+\end{multline*}
+В результаті
+\[F_{S_{N}}(x)=e^{-\lambda} + \sum_{n=1}^{\infty}\frac{(\lambda x)^{n}}{n!}e^{-\lambda} = \sum_{n=0}^{\infty}\frac{(\lambda x)^{n}}{n!}e^{-\lambda} = e^{\lambda x}e^{-\lambda}=e^{\lambda (x-1)}\text{ при } x\in (0,1).\]
 
 \section*{\centering \textbf{Раунд 3}}
 
