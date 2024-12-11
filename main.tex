@@ -2,6 +2,7 @@
 \usepackage[utf8]{inputenc}
 \usepackage[ukrainian]{babel}
 \usepackage{amsfonts,amsmath}
+\usepackage{hyperref}
 
 \begin{document}
 
@@ -36,7 +37,7 @@
 \lim_{n \to \infty} (n + 1) \cdot \int_{0}^{1} x^n f(x) \, dx.
 \]
 
-\textbf{Розв’язок.} Розглянемо задану границю:
+\textbf{Розв’язок 1. (Шапанов)} Розглянемо задану границю:
 
 \[
 \lim_{n \to \infty} (n + 1) \int_0^1 x^n f(x)\,dx.
@@ -78,6 +79,35 @@
 \[
 \boxed{f(1)}.
 \]
+
+
+\textbf{Розв’язок 2. (Логвінов)} Розглянемо задану границю для одночленів $x^k, k \in \mathbb{N} \cup \{0\}$, матимемо:
+
+\[
+\lim_{n \to \infty} (n + 1) \int_{0}^{1} x^n x^k \, dx = \lim_{n \to \infty} \frac{n + 1}{n+k+1} = 1.
+\]
+
+Тепер розглянемо ту саму ж границю для многочленів $p(x) \in \mathbb{R}[x]$, матимемо
+
+\[
+\lim_{n \to \infty} (n + 1)  \int_{0}^{1} x^n p(x) \, dx = \sum_{k=1}^m a_k \lim_{n \to \infty}  (n + 1)   \int_{0}^{1} x^n x^k\, dx = \sum_{k=1}^m a_k = p(1).
+\]
+
+Згідно з  \href{https://uk.wikipedia.org/wiki/%D0%A2%D0%B5%D0%BE%D1%80%D0%B5%D0%BC%D0%B0_%D0%92%D0%B5%D1%94%D1%80%D1%88%D1%82%D1%80%D0%B0%D1%81%D1%81%D0%B0_%E2%80%94_%D0%A1%D1%82%D0%BE%D1%83%D0%BD%D0%B0#%D0%A2%D0%B5%D0%BE%D1%80%D0%B5%D0%BC%D0%B0_%D0%92%D0%B5%D1%94%D1%80%D1%88%D1%82%D1%80%D0%B0%D1%81%D1%81%D0%B0}{теоремою Веєрштрасса — Стоуна} для $f \in C[0, 1]$ для довільного $\epsilon>0$ існує $p_\epsilon \in \mathbb{R}[x]$ такий, що $||p_\varepsilon-f||_\infty < \varepsilon/3$.
+
+З того, що $\lim_{n \to \infty} (n + 1)  \int_{0}^{1} x^n p_\varepsilon(x) \, dx = p_\varepsilon(1)$ знаємо, що існує $N_\varepsilon \in \mathbb{N}$ такий, що для всіх $n>N_\varepsilon$ маємо $\left|(n + 1) \int_{0}^{1} x^n p_\varepsilon(x) \, dx - p_\varepsilon (1)\right| < \varepsilon/3$.
+
+Тепер візьмемо довільне $\varepsilon >0$ для нього існує $N_\varepsilon \in \mathbb{N}$ як описано вище тоді для довільного $n > N_\varepsilon$ маємо 
+
+\begin{multline*}
+\left|(n + 1)  \int_{0}^{1} x^n f(x)\, dx - f(1)\right| \leq \left|f(1)-p_\varepsilon (1)\right| + \\ +\left|p_\varepsilon (1)  - (n + 1)  \int_{0}^{1} x^n p_\varepsilon (x)\, dx\right| 
++ \left|(n + 1)  \int_{0}^{1} x^n (p_\varepsilon (x)-f(x))\, dx\right| \leq \\ 
+\leq \varepsilon/3 + \varepsilon/3 +\varepsilon/3 \left( (n + 1)  \int_{0}^{1} |x|^n\, dx \right) = \varepsilon.
+\end{multline*}
+
+Отже, $
+\lim_{n \to \infty} (n + 1) \int_{0}^{1} x^n f(x) \, dx = f(1).
+$
 
 \bigskip
 
